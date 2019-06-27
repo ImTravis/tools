@@ -1,0 +1,56 @@
+
+spring:
+  application:
+    name: travis-tools
+  datasource:
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    minIdle: 5
+    validationQuery: SELECT 1 FROM DUAL
+    initialSize: 5
+    maxWait: 60000
+    filters: stat,wall,log4j
+    poolPreparedStatements: true
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.2.121:3306/travis?useUnicode=true&characterEncoding=utf8
+    maxPoolPreparedStatementPerConnectionSize: 20
+    password: 123456
+    testOnBorrow: false
+    testWhileIdle: true
+    minEvictableIdleTimeMillis: 300000
+    timeBetweenEvictionRunsMillis: 60000
+    testOnReturn: false
+    driverClassName: com.mysql.jdbc.Driver
+    maxActive: 20
+    username: root
+#  data :
+#    elasticsearch:
+#      cluster-nodes: 192.168.2.84:9300
+      ##配置文件中明明写的端口是9200，为何这里配置文件中连接的时候写的端口是9300呢？因为，配置9200是通过HTTP连接的端口，9300是TCP连接的端口
+  activemq:
+    user: admin
+    password: admin
+    broker-url: tcp://activemq-server:61616 # 消息组件的连接主机信息
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.ughen.model.db
+
+slave:
+  datasource:
+    one:
+      password: 123456
+      driverClassName: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.2.121:3306/travis?useUnicode=true&characterEncoding=utf8
+      username: root
+    two:
+      password: 123456
+      driverClassName: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://192.168.2.121:3306/travis?useUnicode=true&characterEncoding=utf8
+      username: root
+  datasourcenames: one,two
+
+
+
+
+
