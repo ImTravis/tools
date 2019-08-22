@@ -11,7 +11,7 @@ spring:
     filters: stat,wall,log4j
     poolPreparedStatements: true
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.2.121:3306/travis?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.0.72:3306/travis?useUnicode=true&characterEncoding=utf8
     maxPoolPreparedStatementPerConnectionSize: 20
     password: 123456
     testOnBorrow: false

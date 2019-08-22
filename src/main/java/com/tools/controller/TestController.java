@@ -1,21 +1,24 @@
 package com.tools.controller;
 
+import com.tools.Utils.ImageUtil;
 import com.tools.Utils.SpringUtil;
+import com.tools.Utils.ThumbnailMaker;
 import com.tools.Utils.httpClientUtil.HttpClientUtil;
 import com.tools.common.db.Book;
 import com.tools.common.db.Urlset;
 import com.tools.redis.scene.distributedLock.RedisService;
 import com.tools.redis.scene.distributedLock.ThreadRedis;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
@@ -27,6 +30,9 @@ import java.util.zip.GZIPOutputStream;
  */
 @RestController
 public class TestController {
+
+    @Autowired
+    ImageUtil imageUtil;
     /**
      * 支付服务回调地址-返回预下单参数
      * @param request
@@ -146,5 +152,35 @@ public class TestController {
         return "";
     }
 
+
+    /**
+     * 缩略
+     *
+     * @return
+     */
+    @PostMapping("smallPic")
+    public String recogCarNumOpenBarrier(@RequestParam(value="file") MultipartFile file) {
+
+        imageUtil.thumbnailImage(file,100, 150,"aa_",false);
+        return "";
+    }
+
+    @ResponseBody
+    @RequestMapping("/uploadAbbreviationLogo")
+    public String uploadAbbreviationLogo(@RequestParam(value="file") MultipartFile file) throws IOException, FileUploadException {
+
+        try {
+
+            String slPath = ThumbnailMaker.abbreviationPic(file, 200, 100);
+
+            System.out.print(slPath);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return "";
+    }
 
 }
