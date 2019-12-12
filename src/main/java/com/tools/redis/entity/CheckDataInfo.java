@@ -32,4 +32,36 @@ public class CheckDataInfo implements Serializable {
                 ", orderNo='" + orderNo + '\'' +
                 '}';
     }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public BigDecimal getPayment() {
+        return payment;
+    }
+
+    public void setPayment(BigDecimal payment) {
+        this.payment = payment;
+    }
+
+    public int getOrderStaus() {
+        return orderStaus;
+    }
+
+    public void setOrderStaus(int orderStaus) {
+        this.orderStaus = orderStaus;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
 }

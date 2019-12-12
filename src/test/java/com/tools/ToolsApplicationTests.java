@@ -1,5 +1,6 @@
 package com.tools;
 
+import com.tools.Utils.CSVUtils;
 import com.tools.common.db.Book;
 import com.tools.controller.TestController;
 import com.tools.redis.scene.distributedLock.RedisService;
@@ -32,6 +33,8 @@ public class ToolsApplicationTests {
 	TestController testController;
 	@Autowired
 	RedisService service;
+	@Autowired
+	CSVUtils csvUtils;
 
 
 	/**
@@ -130,6 +133,12 @@ public class ToolsApplicationTests {
 			e.printStackTrace();
 		}
 		return i;
+	}
+
+
+	@Test
+	public void testOne(){
+		csvUtils.startCsv();
 	}
 
 }

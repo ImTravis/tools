@@ -317,6 +317,26 @@ public class RedisUtils {
         }
     }
 
+    //Set 批量操作
+    public long sSetBath(String key, long time, List<Object> objs) {
+        Long count = 0L;
+        try {
+            if (time > 0) {
+                for (Object obj : objs) {
+                    count = sSetAndTime(key, time, obj);
+                }
+            } else {
+                for (Object obj : objs) {
+                    count = sSet(key, obj);
+                }
+            }
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     /**
      * 获取set缓存的长度
      *
