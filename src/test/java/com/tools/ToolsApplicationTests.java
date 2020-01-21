@@ -146,6 +146,17 @@ public class ToolsApplicationTests {
 	Processor processor;
 	@Test
 	public void testTwo(){
+
+//		CREATE TABLE `person` (
+//				`id` int(64) NOT NULL AUTO_INCREMENT,
+//				`name` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+//		`des` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+//		`dno` int(11) DEFAULT NULL,
+//		`createTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+//				PRIMARY KEY (`id`)
+//) ENGINE=InnoDB AUTO_INCREMENT=29101 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+//
+//
 		List<Person> personList = new ArrayList<>();
 		Person person = null;
 		Date date1 = new Date();
