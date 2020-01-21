@@ -1,11 +1,15 @@
 package com.tools;
 
 import com.tools.Utils.CSVUtils;
+import com.tools.Utils.DateUtils;
+import com.tools.Utils.RandomStringUtil;
 import com.tools.common.db.Book;
+import com.tools.common.db.Person;
 import com.tools.controller.TestController;
 import com.tools.redis.scene.distributedLock.RedisService;
 import com.tools.redis.scene.distributedLock.ThreadRedis;
 import com.tools.redis.utils.RedisSetOption;
+import com.tools.threadMax.Processor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -139,6 +140,34 @@ public class ToolsApplicationTests {
 	@Test
 	public void testOne(){
 		csvUtils.startCsv();
+	}
+
+	@Autowired
+	Processor processor;
+	@Test
+	public void testTwo(){
+		List<Person> personList = new ArrayList<>();
+		Person person = null;
+		Date date1 = new Date();
+		for(int k=0;k<10000;k++){
+			person = new Person();
+
+			int number = new Random().nextInt(100) + 1;
+			person.setDno(number);
+			number = new Random().nextInt(10) + 1;
+			person.setName(RandomStringUtil.getRandomStr(number));
+			person.setDes(RandomStringUtil.getRandomStr(number));
+			personList.add(person);
+			person.setCreateTime(DateUtils.dateStr3(new Date()));
+		}
+
+
+		if(processor.handler(personList)){
+			int mill = DateUtils.millisecondBetween(date1,new Date());
+			System.out.print("使用时间："+mill+"\n");
+		}
+
+
 	}
 
 }
