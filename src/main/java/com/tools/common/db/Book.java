@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @des 描述：
  */
 @Data
-@Scope(value="prototype")
+@Scope(value="singleton")
 @Component
 @Service
 public class Book {

@@ -40,13 +40,13 @@ slave:
       password: 123456
       driverClassName: com.mysql.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
-      url: jdbc:mysql://192.168.2.121:3306/travis?useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://172.172.0.:3306/xlcloud_new?useUnicode=true&characterEncoding=utf8
       username: root
     two:
       password: 123456
       driverClassName: com.mysql.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
-      url: jdbc:mysql://192.168.2.121:3306/travis?useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://172.172.0.:3306/xlcloud_new?useUnicode=true&characterEncoding=utf8
       username: root
   datasourcenames: one,two
 

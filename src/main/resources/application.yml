@@ -1,6 +1,8 @@
 server:
   port: 8084
 spring:
+  autoconfigure:
+    exclude:
   profiles:
     active: qa
   redis:

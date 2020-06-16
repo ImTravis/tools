@@ -521,8 +521,20 @@ public class StringUtils {
         }
     }
 
-    public static void main(String[] a) {
-        String escapeXML = escapeXML("\\");
-        System.out.println(escapeXML);
+//    public static void main(String[] a) {
+//        String escapeXML = escapeXML("\\");
+//        System.out.println(escapeXML);
+//    }
+    public static void main(String[] args){
+        List<String> a = new ArrayList<>();
+        a.add("a");
+        a.add("b");
+        a.add("c");
+        for(int k=0;k<a.size();k++){
+            System.out.println("\n处理"+a.get(k));
+            if(a.get(k).equals("b")){
+                a.remove(a.get(k));
+            }
+        }
     }
 }
