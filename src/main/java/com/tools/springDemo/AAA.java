@@ -1,10 +1,7 @@
 package com.tools.springDemo;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -12,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-public class AAA implements InitializingBean, BeanNameAware, BeanFactoryAware, ApplicationContextAware {
+public class AAA implements InitializingBean, BeanNameAware, BeanFactoryAware, ApplicationContextAware, DisposableBean {
     public AAA() {
         System.out.println("\n[AAA] Constructor");
     }
@@ -34,7 +31,13 @@ public class AAA implements InitializingBean, BeanNameAware, BeanFactoryAware, A
 
 
     public void des() {
-        System.out.println("\n[AAA] @des AAA desTory");
+        System.out.println("\n[AAA] destroy Method @des AAA desTory");
+    }
+
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("\n[AAA] implements DisposableBean AAA desTory");
     }
 
 
@@ -64,4 +67,5 @@ public class AAA implements InitializingBean, BeanNameAware, BeanFactoryAware, A
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         System.out.println("\n[AAA] implements ApplicationContextAware ，applicationContext = " + applicationContext);
     }
+
 }
