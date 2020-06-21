@@ -1,13 +1,16 @@
 package com.tools;
 
 import com.tools.Utils.CSVUtils;
+import com.tools.Utils.DateUtils;
+import com.tools.Utils.RandomStringUtil;
 import com.tools.common.db.Book;
+import com.tools.common.db.Person;
 import com.tools.controller.TestController;
 import com.tools.redis.scene.distributedLock.RedisService;
 import com.tools.redis.scene.distributedLock.ThreadRedis;
 import com.tools.redis.utils.RedisSetOption;
-import com.tools.streamTask.Student;
 import com.tools.streamTask.TaskDeal;
+import com.tools.threadMax.Processor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -46,7 +46,6 @@ public class ToolsApplicationTests {
     public void contextLoads() {
         redisSetOption.diffSets();
     }
-
     /**
      * redis hash
      * Redis的Hash实际是内部存储的Value为一个HashMap，并提供了直接存取这个Map成员的接口
@@ -57,13 +56,13 @@ public class ToolsApplicationTests {
     }
 
     @Test
-    public void regist() {
+    public void regist(){
         testController.registInfo();
     }
 
 
     @Test
-    public void reidsLock() {
+    public void reidsLock(){
 
         for (int i = 0; i < 2; i++) {
             ThreadRedis threadA = new ThreadRedis(service);
@@ -72,7 +71,7 @@ public class ToolsApplicationTests {
     }
 
     @Test
-    public void entry() {
+    public void entry(){
 
 
     }
@@ -85,7 +84,7 @@ public class ToolsApplicationTests {
             System.out.println("task doing...");
             try {
                 Thread.sleep(3000);
-                int i = 1 / 1;
+                int i = 1/1;
             } catch (Exception e) {
                 // 告诉completableFuture任务发生异常了
                 completableFuture.completeExceptionally(e);
@@ -99,7 +98,7 @@ public class ToolsApplicationTests {
     }
 
     @Test
-    public void test1() {
+    public void test1(){
         long start = System.currentTimeMillis();
         // 结果集
         List<String> list = new ArrayList<>();
