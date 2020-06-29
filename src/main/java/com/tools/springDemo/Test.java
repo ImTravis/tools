@@ -13,11 +13,12 @@ import org.springframework.core.io.InputStreamResource;
 
 public class Test {
     public static void main(String[] args){
-//        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-//        ac.register(AppConfig.class);
-//        ac.refresh();
-//        AAA aaa = (AAA)ac.getBean("AAA");
-//        System.out.println("\n[AAA] 获取 AAA 对象:"+ac.getBean("AAA"));
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+//        ac.scan("com.tools.springDemo");
+        ac.register(AppConfig.class);
+        ac.refresh();
+        AAA aaa = (AAA)ac.getBean("AAA");
+        System.out.println("\n[AAA] 获取 AAA 对象:"+ac.getBean("AAA"));
 //        System.out.println("\n[AAA] remove AAA:"+ac.getBean("AAA"));
 //        ac.removeBeanDefinition("AAA");
 //        System.out.println(ac.getBean("BBB"));
@@ -47,14 +48,14 @@ public class Test {
 //        ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(factory4);
 //        classPathBeanDefinitionScanner.scan("com.tools.springDemo");
 //        System.out.println(factory4.getBean("AAA"));//AAA获取不到，AAA是通过AppConfig类@Configuration，里面的@Bean来声明实例化的
+//
 
 
-
-        //通过配置文件加载Bean
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
-        applicationContext.getBean("ccc");
-        System.out.println(applicationContext.getBean("ccc"));
-
+//        //通过配置文件加载Bean
+//        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
+//        applicationContext.getBean("ccc");
+//        System.out.println(applicationContext.getBean("ccc"));
+//
 
     }
 }
