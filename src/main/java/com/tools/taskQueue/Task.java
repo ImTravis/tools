@@ -6,9 +6,13 @@ package com.tools.taskQueue;
  * @time 15:39.
  */
 
+import com.tools.springDemo.MyScanner;
+import org.springframework.stereotype.Component;
+
 /**
  * 任务列表
  */
+
 public interface Task {
 
     //取钱

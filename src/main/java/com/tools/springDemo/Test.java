@@ -14,8 +14,8 @@ import org.springframework.core.io.InputStreamResource;
 public class Test {
     public static void main(String[] args){
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-//        ac.scan("com.tools.springDemo");
-        ac.register(AppConfig.class);
+        ac.scan("com.tools.springDemo");
+//        ac.register(AppConfig.class);
         ac.refresh();
         AAA aaa = (AAA)ac.getBean("AAA");
         System.out.println("\n[AAA] 获取 AAA 对象:"+ac.getBean("AAA"));

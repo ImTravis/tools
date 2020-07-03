@@ -6,6 +6,8 @@ package com.tools.taskQueue;
  * @time 15:48.
  */
 
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.BlockingQueue;
 
 /**

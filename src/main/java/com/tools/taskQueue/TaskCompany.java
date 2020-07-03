@@ -6,6 +6,9 @@ package com.tools.taskQueue;
  * @time 16:04.
  */
 
+import com.tools.springDemo.MyScanner;
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -13,6 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 专门执行任务的池
  * 抽象-银行等
  */
+@MyScanner
 public class TaskCompany {
 
     // 银行里面办事的人
