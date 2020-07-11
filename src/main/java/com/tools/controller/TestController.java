@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
@@ -31,6 +32,8 @@ import java.util.zip.GZIPOutputStream;
 @RestController
 public class TestController {
 
+    @Autowired
+    Book book;
     @Autowired
     ImageUtil imageUtil;
     /**
@@ -80,6 +83,11 @@ public class TestController {
     }
 
 
+    /**
+     * 压缩字符串，以文件形式返回
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "ServletDemo02")
     public void ServletDemo02(HttpServletRequest request, HttpServletResponse response){
         try{
@@ -143,12 +151,17 @@ public class TestController {
 
     @RequestMapping(value = "/getSingle", method = RequestMethod.GET)
     private String getSingle() {
+        book.setTime("ds");
 
         Book booka = SpringUtil.getBean(Book.class);
         booka.setName("bookA");
 
         Book bookb = SpringUtil.getBean(Book.class);
         System.out.print(bookb);
+
+        Book bookc = new Book();
+        bookc.getName();
+        System.out.print(bookc);
         return "";
     }
 

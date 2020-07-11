@@ -1,7 +1,11 @@
 package com.tools.Utils.httpClientUtil;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Consts;
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -45,10 +49,39 @@ public class HttpClientUtil {
     public static void main(String[] args) {
         try {
 
-            Map<String, String> params = new HashMap<>();
-            params.put("randomStr", "789456");//调用方生成的随机数
-            String returlUrl = "http://192.168.2.121:8082/backUrl";
-            HttpClientUtil.doGet(returlUrl, params);
+//            Map<String, String> params = new HashMap<>();
+//            params.put("randomStr", "789456");//调用方生成的随机数
+//            String returlUrl = "http://192.168.2.121:8082/backUrl";
+//            HttpClientUtil.doGet(returlUrl, params);
+
+            String callback ="jQuery18307550803723522186_1584692865386";
+            Map<String, String> paramsA = new HashMap<>();
+            paramsA.put("callback", callback);//调用方生成的随机数
+            paramsA.put("_", "1584692865522");//调用方生成的随机数
+
+            String returlUrlA = "https://api.fund.eastmoney.com/Favor/Get";
+            Map<String,String> header = new HashMap<>();
+            String cookie ="Eastmoney_Fund=100038_750002_110007_005312_161017; Eastmoney_Fund_Transform=true; EMFUND1=null; EMFUND2=null; EMFUND3=null; EMFUND4=null; EMFUND5=null; EMFUND6=null; qgqp_b_id=46536cde6776fb567430a80b7fa7f32a; EMFUND0=null; EMFUND7=03-17%2014%3A48%3A39@%23%24%u5BCC%u56FD%u6CAA%u6DF1300%u6307%u6570%u589E%u5F3A@%23%24100038; EMFUND8=03-18%2014%3A40%3A57@%23%24%u94F6%u6CB3%u521B%u65B0%u6210%u957F%u6DF7%u5408@%23%24519674; EMFUND9=03-19 16:39:07@#$%u4E07%u5BB6%u7ECF%u6D4E%u65B0%u52A8%u80FD%u6DF7%u5408C@%23%24005312; st_pvi=39392333040446; st_sp=2020-03-17%2013%3A11%3A56; st_inirUrl=https%3A%2F%2Fwww.baidu.com%2Flink";
+            header.put("Cookie",cookie);
+            header.put("Accept-Encoding","gzip, deflate, br");
+            header.put("Accept-Language","zh-CN,zh;q=0.9");
+            header.put("Accept","*/*");
+            header.put("Referer","http://favor.fund.eastmoney.com/");
+            String str = HttpClientUtil.doGet(returlUrlA, paramsA,header);
+            str = str.replace(callback,"").replace("(","").replace(")","");
+            JSONObject jsonObject = JSONObject.parseObject(str);
+            JSONObject data = (JSONObject)jsonObject.get("Data");
+            JSONArray kfs = JSONArray.parseArray(JSONObject.toJSONString(data.get("KFS")));
+            System.out.print("\n"+kfs);
+            for(Object obj : kfs){
+                JSONObject e = (JSONObject)JSONObject.toJSON(obj);
+                System.out.print("\n票号:"+e.getString("FCODE")+",名称:"+e.getString("SHORTNAME")+",涨幅"+e.getString("gsz"));
+
+            }
+//            gsz
+//                    SHORTNAME
+//            FCODE
+            System.out.print("\n");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -126,7 +159,6 @@ public class HttpClientUtil {
 
             // 创建http GET请求
             HttpGet httpGet = new HttpGet(uri);
-
             // 执行请求
             response = httpclient.execute(httpGet);
             // 判断返回状态是否为200
@@ -216,7 +248,54 @@ public class HttpClientUtil {
             }
         }
 
+
         return resultString;
     }
+
+    public static String doGet(String url, Map<String, String> param, Map<String, String> headers) {
+
+        // 创建Httpclient对象
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        String resultString = "";
+        CloseableHttpResponse response = null;
+        try {
+            // 创建uri
+            URIBuilder builder = new URIBuilder(url);
+            if (param != null) {
+                for (String key : param.keySet()) {
+                    builder.addParameter(key, param.get(key));
+                }
+            }
+            URI uri = builder.build();
+
+            // 创建http GET请求
+            HttpGet httpGet = new HttpGet(uri);
+
+            for (Map.Entry<String, String> head : headers.entrySet()) {
+                httpGet.addHeader(String.valueOf(head.getKey()),head.getValue());
+            }
+
+            // 执行请求
+            response = httpclient.execute(httpGet);
+            // 判断返回状态是否为200
+            if (response.getStatusLine().getStatusCode() == 200) {
+                resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (response != null) {
+                    response.close();
+                }
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultString;
+    }
+
 
 }
