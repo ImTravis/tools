@@ -1,14 +1,12 @@
 package com.tools.springDemo;
 
 import org.springframework.context.annotation.Import;
-import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 @Target(value = {ElementType.TYPE})
-@Import(com.tools.springDemo.MyScannerRegister.class)
-public @interface MyScanner {
+public @interface MyScanner2 {
     String[] basePackages() default {};
 
     String[] value() default {};

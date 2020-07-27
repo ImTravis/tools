@@ -1,5 +1,6 @@
 package com.tools.springDemo;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

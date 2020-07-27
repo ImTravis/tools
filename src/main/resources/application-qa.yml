@@ -30,6 +30,12 @@ spring:
     user: admin
     password: admin
     broker-url: tcp://activemq-server:61616 # 消息组件的连接主机信息
+  artemis:
+    mode: native
+    host: localhost
+    port: 8161
+    user: admin
+    password: admin
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.ughen.model.db

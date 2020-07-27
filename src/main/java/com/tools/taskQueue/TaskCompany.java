@@ -7,6 +7,7 @@ package com.tools.taskQueue;
  */
 
 import com.tools.springDemo.MyScanner;
+import com.tools.springDemo.MyScanner2;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.BlockingQueue;
@@ -16,7 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 专门执行任务的池
  * 抽象-银行等
  */
-@MyScanner
+@MyScanner2
 public class TaskCompany {
 
     // 银行里面办事的人
@@ -25,7 +26,10 @@ public class TaskCompany {
     //执行的窗口-服务窗口人员
     private TaskExecutor[] taskExecutors;
 
-    public TaskCompany(BlockingQueue<TaskPeople> taskQueue,int size) {
+    public TaskCompany() {
+    }
+
+    public TaskCompany(BlockingQueue<TaskPeople> taskQueue, int size) {
         this.taskQueue = taskQueue;
         this.taskExecutors = new TaskExecutor[size];
 
