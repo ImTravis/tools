@@ -24,6 +24,13 @@ public class CSVUtils {
     @Autowired
     RedisUtils redisUtil;
 
+    /**
+     * 根據路径读取Excel的数据，开发根据需要适当修改
+     *
+     * @param Str
+     * @return
+     * @throws IOException
+     */
     public static List<Object> csvReadOperation(String Str) throws IOException {
         File file = new File(Str);
         CsvReader csvReader = new CsvReader();
@@ -38,19 +45,9 @@ public class CSVUtils {
         return list;
     }
 
-    public void startCsv()  {
-        try{
-            List<Object> hadDatasDeviceId = csvReadOperation("E:\\deviceid.csv");
-            List<Object> ALlDeviceId = csvReadOperation("E:\\pyddeviceid.csv");
-
-            redisUtil.lSet("hadDatasDeviceId",hadDatasDeviceId,60);
-            redisUtil.lSet("aLlDeviceId",ALlDeviceId,60);
-
-            System.out.println( redisUtil.sHasKey("hadDatasDeviceId","12453"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+//        List<Object> ALlDeviceId = csvReadOperation("E:\\pyddeviceid.csv");
+//
+//        redisUtil.lSet("hadDatasDeviceId",hadDatasDeviceId,60);
 //        StringBuffer stringBuffer = new StringBuffer();
 //        List<String> terminal = new ArrayList<>();
 //        ALlDeviceId.stream().filter(one -> {
@@ -66,10 +63,16 @@ public class CSVUtils {
 
 
 //        writeToTxt(new ArrayList(), "E:\\deviceid.txt", stringBuffer.toString());
-    }
 
+
+    /**
+     * 把文件写入制定路径
+     *
+     * @param list
+     * @param path
+     * @param str
+     */
     public static void writeToTxt(List list, String path, String str) {
-
         String dir = path.substring(0, path.lastIndexOf("\\"));
         File parent = new File(dir);
         if (parent != null && !parent.exists()) {

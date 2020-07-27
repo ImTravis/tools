@@ -9,6 +9,7 @@ import com.tools.controller.TestController;
 import com.tools.redis.scene.distributedLock.RedisService;
 import com.tools.redis.scene.distributedLock.ThreadRedis;
 import com.tools.redis.utils.RedisSetOption;
+import com.tools.streamTask.TaskDeal;
 import com.tools.threadMax.Processor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -133,12 +134,6 @@ public class ToolsApplicationTests {
 			e.printStackTrace();
 		}
 		return i;
-	}
-
-
-	@Test
-	public void testOne(){
-		csvUtils.startCsv();
 	}
 
 	@Autowired
