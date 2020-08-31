@@ -29,7 +29,7 @@ public class MyClassPathScanner extends ClassPathBeanDefinitionScanner {
 
     //定义默认的注解过滤，只扫描指定注解
     protected void registerDefaultFilters() {
-        this.addIncludeFilter(new AnnotationTypeFilter(MyScanner.class));
+//        this.addIncludeFilter(new AnnotationTypeFilter(MyScanner.class));
         this.addIncludeFilter(new AnnotationTypeFilter(MyScanner2.class));
     }
 }

@@ -1,6 +1,5 @@
 package com.tools.spring.postProcessor;
 
-import com.tools.redis.scene.distributedLock.ThreadRedis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -13,8 +12,8 @@ import org.springframework.stereotype.Component;
  * 文件说明
  */
 @Component
-public class MyBeanPostProcessor implements BeanPostProcessor {
-    private final static Logger logger = LoggerFactory.getLogger(MyBeanPostProcessor.class);
+public class MyInfoBeanPostProcessor implements BeanPostProcessor {
+    private final static Logger logger = LoggerFactory.getLogger(MyInfoBeanPostProcessor.class);
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         logger.info("\n自定义后置处理：Before:"+beanName+":"+bean.getClass());

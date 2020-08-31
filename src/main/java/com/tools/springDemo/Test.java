@@ -20,7 +20,7 @@ public class Test {
         AAA aaa = (AAA)ac.getBean("AAA");
         System.out.println("\n[AAA] 获取 AAA 对象:"+ac.getBean("AAA"));
 //        System.out.println("\n[AAA] remove AAA:"+ac.getBean("AAA"));
-//        ac.removeBeanDefinition("AAA");
+        ac.removeBeanDefinition("AAA");
 //        System.out.println(ac.getBean("BBB"));
 
         //通过配置文件加载Bean,持有DefaultBeanDefinitionDocumentReader对xml进行扫描解析,方法参考：doRegisterBeanDefinitions

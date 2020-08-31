@@ -2,21 +2,30 @@ package com.tools.springDemo;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+//@Component
 public class AAA implements InitializingBean, BeanNameAware, BeanFactoryAware, ApplicationContextAware, DisposableBean {
+    private String name;
+    public AAA(String name) {
+        this.name = name;
+        System.out.println("\n[AAA] Constructor 1");
+    }
     public AAA() {
-        System.out.println("\n[AAA] Constructor");
+        System.out.println("\n[AAA] Constructor 2");
     }
 
     @PostConstruct
     public void initPostConstruct() {
-        System.out.println("\n[AAA] @PostConstruct-init AAA init");
+        System.out.println("\n[AAA] @PostConstruct- before init AAA init");
     }
 
 
@@ -31,7 +40,7 @@ public class AAA implements InitializingBean, BeanNameAware, BeanFactoryAware, A
 
 
     public void des() {
-        System.out.println("\n[AAA] destroy Method @des AAA desTory");
+        System.out.println("\n[AAA] @Bean-destroyMethod AAA desTory");
     }
 
 

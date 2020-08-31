@@ -5,16 +5,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@ComponentScan("com.tools.springDemo")
+//@ComponentScan("com.tools.springDemo")
 @Configuration
 public class AppConfig {
-
+//
     @Bean(initMethod = "init",destroyMethod = "des")
     public AAA AAA(){
-        return new AAA();
-
+        return new AAA("sd");
     }
+//
 
+    public AppConfig(){
+        System.out.println("\n Appconfig");
+    }
 
 }
 

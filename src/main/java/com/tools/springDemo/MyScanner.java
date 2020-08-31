@@ -1,6 +1,7 @@
 package com.tools.springDemo;
 
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;

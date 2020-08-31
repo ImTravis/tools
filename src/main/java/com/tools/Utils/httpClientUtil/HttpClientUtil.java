@@ -22,6 +22,10 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -59,14 +63,25 @@ public class HttpClientUtil {
             paramsA.put("callback", callback);//调用方生成的随机数
             paramsA.put("_", "1584692865522");//调用方生成的随机数
 
-            String returlUrlA = "https://api.fund.eastmoney.com/Favor/Get";
+            String returlUrlA = "http://q.10jqka.com.cn/index/index/board/all/field/zdf/order/desc/page/3/ajax/1/";
             Map<String,String> header = new HashMap<>();
-            String cookie ="Eastmoney_Fund=100038_750002_110007_005312_161017; Eastmoney_Fund_Transform=true; EMFUND1=null; EMFUND2=null; EMFUND3=null; EMFUND4=null; EMFUND5=null; EMFUND6=null; qgqp_b_id=46536cde6776fb567430a80b7fa7f32a; EMFUND0=null; EMFUND7=03-17%2014%3A48%3A39@%23%24%u5BCC%u56FD%u6CAA%u6DF1300%u6307%u6570%u589E%u5F3A@%23%24100038; EMFUND8=03-18%2014%3A40%3A57@%23%24%u94F6%u6CB3%u521B%u65B0%u6210%u957F%u6DF7%u5408@%23%24519674; EMFUND9=03-19 16:39:07@#$%u4E07%u5BB6%u7ECF%u6D4E%u65B0%u52A8%u80FD%u6DF7%u5408C@%23%24005312; st_pvi=39392333040446; st_sp=2020-03-17%2013%3A11%3A56; st_inirUrl=https%3A%2F%2Fwww.baidu.com%2Flink";
-            header.put("Cookie",cookie);
-            header.put("Accept-Encoding","gzip, deflate, br");
-            header.put("Accept-Language","zh-CN,zh;q=0.9");
-            header.put("Accept","*/*");
-            header.put("Referer","http://favor.fund.eastmoney.com/");
+//            String cookie ="Eastmoney_Fund=100038_750002_110007_005312_161017; Eastmoney_Fund_Transform=true; EMFUND1=null; EMFUND2=null; EMFUND3=null; EMFUND4=null; EMFUND5=null; EMFUND6=null; qgqp_b_id=46536cde6776fb567430a80b7fa7f32a; EMFUND0=null; EMFUND7=03-17%2014%3A48%3A39@%23%24%u5BCC%u56FD%u6CAA%u6DF1300%u6307%u6570%u589E%u5F3A@%23%24100038; EMFUND8=03-18%2014%3A40%3A57@%23%24%u94F6%u6CB3%u521B%u65B0%u6210%u957F%u6DF7%u5408@%23%24519674; EMFUND9=03-19 16:39:07@#$%u4E07%u5BB6%u7ECF%u6D4E%u65B0%u52A8%u80FD%u6DF7%u5408C@%23%24005312; st_pvi=39392333040446; st_sp=2020-03-17%2013%3A11%3A56; st_inirUrl=https%3A%2F%2Fwww.baidu.com%2Flink";
+//            header.put("Cookie",cookie);
+//            header.put("Accept-Encoding","gzip, deflate, br");
+//            header.put("Accept-Language","zh-CN,zh;q=0.9");
+//            header.put("Accept","*/*");
+//            header.put("Referer","http://favor.fund.eastmoney.com/");
+
+            Document document = Jsoup.connect(returlUrlA).get();
+            Elements tbody = document.getElementsByTag("tbody");
+            Elements trs = tbody.get(0).getElementsByTag("tr");
+
+            for(Element element : trs){
+                element.getElementsByTag("td").get(1).getElementsByTag("a").get(0).text();
+                element.getElementsByTag("td").get(1).getElementsByTag("a").get(0).text();
+            }
+
+
             String str = HttpClientUtil.doGet(returlUrlA, paramsA,header);
             str = str.replace(callback,"").replace("(","").replace(")","");
             JSONObject jsonObject = JSONObject.parseObject(str);
